@@ -14,6 +14,7 @@ $ export PORT=8088
 ## Password Hashing Application Specification
 
 The following is the requirement specification that was used in building the password hashing application. It describes what the application ​should​ do.
+
 ● When launched, the application should wait for http connections.
 
 ● It should answer on the ​PORT​ specified in the ​PORT​ environment variable.
