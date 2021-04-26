@@ -36,11 +36,13 @@ shutdown.
 
 $ curl -X POST -H "application/json" -d '{"password":"angrymonkey"}'
 http://127.0.0.1:8088/hash
+
 > 42
-> 
+
 * Get the base64 encoded password
 
 $ curl -H "application/json" ​http://127.0.0.1:8088/hash/1
+
 > zHkbvZDdwYYiDnwtDdv/FIWvcy1sKCb7qi7Nu8Q8Cd/MqjQeyCI0pWKDGp74A1g==
 
 * Get the stats
@@ -52,33 +54,46 @@ $ curl ​http://127.0.0.1:8088/stats
 
 $ curl -X POST -d ‘shutdown’ h​ ttp://127.0.0.1:8088/hash > 200 Empty Response
 
-## Test Cases and resluts for testing the hashing application
+## Test Cases and results for testing the hashing application
 
 1. Execute application without a port envrionment variable set
 
-*Expected Result: connection refused*
+    *Expected Result: connection refused*
 
-*Actual Result: Error: connect ECONNREFUSED 127.0.0.1:8088*
+    *Actual Result: Error: connect ECONNREFUSED 127.0.0.1:8088*
 
-**Status: Pass**
+  **Status: Pass**
 
 2. Set port variable for PORT=8088
 
-*Expected Result: port is sucesfully set to port 8088*
+    *Expected Result: port is sucesfully set to port 8088*
 
-*Actual Result: port is set to 8088*
+    *Actual Result: port is set to 8088*
 
-**Status: Pass**
+  **Status: Pass**
 
 3. Run the application sucesfully 
 
-$ ./broken-hashserve_darwin 
+    $ ./broken-hashserve_darwin 
 
-*Expected Result: When launched, the application should wait for http connections and connection is not refused*
+    *Expected Result: When launched, the application should wait for http connections and connection is not refused*
 
-*Actual Result: Application launched sucessfully and waited for http connections*
+    *Actual Result: Application launched sucessfully and waited for http connections*
 
-**Status: Pass**
+  **Status: Pass**
+  
+4. Post to the /hash endpoint 
+
+    $ curl http://127.0.0.1:8088/hash -X POST -H "application/json" -d '{"password":"password123"}' 
+    
+    *Expected Result: should return a job identifier immediately, It should then wait 5 seconds and compute the password hash in SHA512* 
+    
+    *Actual Result: Job Identifier took about 5 seconds to return as well as the password hash in SHA512 format*
+    
+    **Status: Fail**
+                        
+             
+                       
 
 
 
