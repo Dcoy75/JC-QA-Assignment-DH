@@ -24,7 +24,7 @@ The following is the requirement specification that was used in building the pas
 * The software should be able to process multiple connections simultaneously.
 
 * The software should support a graceful shutdown request. Meaning, it should allow any
-in-flight password hashing to complete, reject any new requests, respond with a ​200​ and
+in-flight password hashing to complete, reject any new requests, respond with a 200 and
 shutdown.
 
 * No additional password requests should be allowed when shutdown is pending.
@@ -56,7 +56,7 @@ $ curl -X POST -d ‘shutdown’ http://127.0.0.1:8088/hash > 200 Empty Response
 
 ## Test Cases and results for testing the hashing application
 
-1. Execute application without a port envrionment variable set
+1. Execute application without a port environment variable set
 
     *Expected Result: connection refused*
 
@@ -118,8 +118,8 @@ $ curl -X POST -d ‘shutdown’ http://127.0.0.1:8088/hash > 200 Empty Response
    
     *Expected Result: allow any in-flight password hashing to complete, reject any new requests, respond with a 200 and shutdown*
     
-    *Actual Result: Able to submit an inflight request and shut down timestamp 2021/04/26 22:00:25 Shutdown signal recieved
-     2021/04/26 22:00:25 Shutting down
+    *Actual Result: Able to submit an inflight request and shut down timestamp 2021/04/26 22:00:25 Shutdown signal received 
+     2021/04/26 22:00:25 Shutting down*
      
       **Status: Pass**
       
@@ -128,7 +128,7 @@ $ curl -X POST -d ‘shutdown’ http://127.0.0.1:8088/hash > 200 Empty Response
    $ curl http://127.0.0.1:8088/hash -X POST -H "application/json" -d '{"password":"password123"}'
    $ curl http://127.0.0.1:8088/hash -X POST -H "application/json" -d '{"password":"password123"}'
    
-   *Expected Results: the same base 64 passsword is returned for 1 and 2*
+   *Expected Results: the same base 64 password is returned for 1 and 2*
    
    *Actual Results: hash/1 = vtTvodT9vZVL03Bdaip4Jw7JpS7Pv7AQxhhir1x2rxdh/+sa72rKG/XQKzeBqoVPq9K2nHkN504X7P7Dy2rEvw==*
                    *hash/2 = vtTvodT9vZVL03Bdaip4Jw7JpS7Pv7AQxhhir1x2rxdh/+sa72rKG/XQKzeBqoVPq9K2nHkN504X7P7Dy2rEvw==* 
@@ -152,7 +152,7 @@ $ curl -X POST -d ‘shutdown’ http://127.0.0.1:8088/hash > 200 Empty Response
    
    *Expected Result: Error message input is not allowed*
    
-   *Actual Reslut: Job identifier and base64 is given for the SQL injection example O2ILtlsjxZBLu539bRMV4mugnN6HkenWctu0VwqV14Qn7AkOfVUz+DbrTAXJFdrDea8CjQMbo+FgN3jCuNSuWg==*
+   *Actual Result: Job identifier and base64 is given for the SQL injection example O2ILtlsjxZBLu539bRMV4mugnN6HkenWctu0VwqV14Qn7AkOfVUz+DbrTAXJFdrDea8CjQMbo+FgN3jCuNSuWg==*
    
    **Status: Fail, assuming this application should not store a malicious input into a database**
    
@@ -161,9 +161,9 @@ $ curl -X POST -d ‘shutdown’ http://127.0.0.1:8088/hash > 200 Empty Response
 
     $ curl http://127.0.0.1:8088/hash -X POST -H "application/json" -d '{"username":"johndoe1@fakemail.com"} 
     
-    *Expected Result: Maloformed input message*
+    *Expected Result: Malformed input message*
     
-    *Actual Reslut: Job identifier and base64 is given for a username input z4PhNX7vuL3xVChQ1m2AB9Yg5AULVxXcg/SpIdNs6c5H0NE8XYXysP+DGNKHfuwvY7kxvUdBeoGlODJ6+SfaPg==*
+    *Actual Result: Job identifier and base64 is given for a username input z4PhNX7vuL3xVChQ1m2AB9Yg5AULVxXcg/SpIdNs6c5H0NE8XYXysP+DGNKHfuwvY7kxvUdBeoGlODJ6+SfaPg==*
     
     **Status: Fail Json input id not checked for "password"** 
     
@@ -181,11 +181,11 @@ $ curl -X POST -d ‘shutdown’ http://127.0.0.1:8088/hash > 200 Empty Response
 
    *Expected Result: hash should be blocked and not created*
    
-   *Actual Resluts: no base 64 encoded password is given not sure why the identifier shows as quote see above image*
+   *Actual Results: no base 64 encoded password is given not sure why the identifier shows as quote see above image*
    
    **Status: Pass**
    
-14. Validate that special charcters and symbols are availble in a password  
+14. Validate that special characters and symbols are available in a password  
 
     $ curl http://127.0.0.1:8088/hash -X POST -H "application/json" -d '{"password":"passworD1!2@3#"}'
     
@@ -207,9 +207,9 @@ $ curl -X POST -d ‘shutdown’ http://127.0.0.1:8088/hash > 200 Empty Response
     $ curl http://127.0.0.1:8093/hash -X POST -H "application/json" -d '{"password":"passworD1!2@3#"}'
     
     
-    *Expected Results: Able to connect and process all conections and return and identirifer and same base64*
+    *Expected Results: Able to connect and process all connections and return and identifier and same base64*
     
-    *Actual Resluts: Connected to all ports and submitted same password to all conections return Identifier as 1 on all ports and base64 BQ7hKpz6AZvCU4vCGV5RJGn34DsHS9TyIKTeAU7TuiWW7CUvcqfLKLQpcU/g6UIl3KHOKSrW4dLm6L9YXUGYVg==*
+    *Actual Results: Connected to all ports and submitted same password to all conections return Identifier as 1 on all ports and base64 BQ7hKpz6AZvCU4vCGV5RJGn34DsHS9TyIKTeAU7TuiWW7CUvcqfLKLQpcU/g6UIl3KHOKSrW4dLm6L9YXUGYVg==*
     
      **Status: Pass**
     
@@ -224,33 +224,28 @@ $ curl -X POST -d ‘shutdown’ http://127.0.0.1:8088/hash > 200 Empty Response
 
 * Usernames should not be hashed 
 
-* Stats times stamp Epoch Date is wrong gives date as 1970 and time stamp not given in milliseconds
+* Stats timesstamp Epoch Date is wrong gives date as 1970 and time stamp not given in milliseconds
 
-* Job identifier takes the same amount of time as time stamp 5 seconds, this should happen immediately
+* Job identifier takes the same amount of time as timestamp 5 seconds, this should happen immediately
 
 
 ## Ideas to automate the regression testing of the hashservice
 
 Create a collection and tests using postman, this can be added to any ci pipeline and run for E2E tests.
 
-* Postive tests happy path get & post request with body and status 200 as assertions
+* Postive tests, get & post request with body and status 200 as assertions
 
 * Regression tests previous bug fixes
 
 * Negative tests or expected failures
+ with regex before reaching the application
 
+* Password hash application should not allow any malicious inputs into a database (Sql Injection)
 
-   
-   
-   
-                   
-                   
+* Null value should not be allowed as a password
 
-             
-                        
-             
-                       
+* Usernames should not be hashed 
 
+* Stats times stamp Epoch Date is wrong gives date as 1970 and time stamp not given in milliseconds
 
-
-
+* Job identifier takes the same amount of time as time stamp 5 seconds, this should happen immediately
