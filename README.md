@@ -98,7 +98,7 @@ $ curl -X POST -d ‘shutdown’ http://127.0.0.1:8088/hash > 200 Empty Response
     
     *Expected Result: It should return the base64 encoded password hash for the corresponding POST request*
     
-    *Actual Result: base64 encoded passcode Example: NN0PAKtieayiTY8/Qd53AeMzHkbvZDdwYYiDnwtDdv/FIWvcy1sKCb7qi7Nu8Q8Cd/MqjQeyCI0pWKDGp74A1g==%*
+    *Actual Result: base64 encoded passcode Example: NN0PAKtieayiTY8/Qd53AeMzHkbvZDdwYYiDnwtDdv/FIWvcy1sKCb7qi7Nu8Q8Cd/MqjQeyCI0pWKDGp74A1g==*
     
      **Status: Pass**
          
