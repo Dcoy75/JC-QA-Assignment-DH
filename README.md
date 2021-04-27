@@ -108,7 +108,7 @@ $ curl -X POST -d ‘shutdown’ http://127.0.0.1:8088/hash > 200 Empty Response
      
      *Expected Result: It should return a JSON data structure for the total hash requests since the server started and the average time of a hash request in milliseconds*
      
-     *Actual Reslut: {"TotalRequests":2,"AverageTime":2556509} Epoch Conversion of the timestamp 2556509 = Fri Jan 30 1970 14:08:29 GMT+0000, incorrect timestamp*
+     *Actual Reslut: {"TotalRequests":2,"AverageTime":2556509} Epoch Conversion of the timestamp 2556509 = Fri Jan 30 1970 14:08:29 GMT+0000, incorrect timestamp year and not given in milliseconds*
      
       **Status: Fail**
       
@@ -224,7 +224,7 @@ $ curl -X POST -d ‘shutdown’ http://127.0.0.1:8088/hash > 200 Empty Response
 
 * Usernames should not be hashed 
 
-* Stats times stamp Epoch Date is wrong gives date as 1970
+* Stats times stamp Epoch Date is wrong gives date as 1970 and time stamp not given in milliseconds
 
 * Job identifier takes the same amount of time as time stamp 5 seconds, this should happen immediately
 
